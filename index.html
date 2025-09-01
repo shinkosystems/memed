@@ -5,7 +5,7 @@
   <title>Prescrição Digital Memed</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body, html {
+    html, body {
       margin: 0;
       padding: 0;
       width: 100%;
@@ -22,7 +22,7 @@
   <div id="memed-container"></div>
 
   <script>
-    // Pega o token da URL (?token=SEU_TOKEN)
+    // Captura parâmetro da URL (?token=SEU_TOKEN)
     function getUrlParameter(name) {
       const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
       const results = regex.exec(location.search);
@@ -32,16 +32,22 @@
     const token = getUrlParameter('token');
 
     if (token) {
-      // Cria o script do SDK
+      // Cria o script oficial do SDK Memed
       const script = document.createElement("script");
-      script.src = "https://integrations.api.memed.com.br/loader.js"; // 👈 Confirme com a doc da Memed
-      script.dataset.token = token; // Passa o token como atributo data-token
+      script.src = "https://integrations.api.memed.com.br/loader.js"; // 👈 confirme a URL do SDK com a Memed
+      script.dataset.token = token; // Token vai como data-token
+      script.dataset.container = "#memed-container"; // Onde renderizar
       script.addEventListener("load", () => {
-        console.log("Memed SDK carregado!");
+        console.log("Memed carregado com sucesso!");
       });
       document.body.appendChild(script);
     } else {
-      document.body.innerHTML = "<h1 style='text-align:center;padding:20px;'>Erro: token não encontrado na URL</h1>";
+      document.body.innerHTML = `
+        <div style="padding:20px;text-align:center">
+          <h1>Erro: Token de acesso não encontrado.</h1>
+          <p>Adicione ?token=SEU_TOKEN na URL.</p>
+        </div>
+      `;
     }
   </script>
 </body>
