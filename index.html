@@ -50,5 +50,13 @@
       `;
     }
   </script>
+  script.addEventListener("load", () => {
+  console.log("Loader da Memed carregado!");
+  if (typeof Memed !== "undefined") {
+    console.log("Memed SDK disponível:", Memed);
+  } else {
+    console.warn("Memed SDK não inicializado!");
+  }
+});
 </body>
 </html>
