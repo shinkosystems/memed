@@ -1,69 +1,48 @@
-<html>
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-    <title>Prescrição Digital Memed</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-      body, html {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden; /* Evita barras de rolagem desnecessárias */
-        font-family: Arial, sans-serif;
-      }
-      #memed-container {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+  <meta charset="UTF-8">
+  <title>Prescrição Digital Memed</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+    #memed-container {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
+  <div id="memed-container"></div>
 
-    <div id="memed-container"></div>
+  <script>
+    // Pega o token da URL (?token=SEU_TOKEN)
+    function getUrlParameter(name) {
+      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+      const results = regex.exec(location.search);
+      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
 
-    <script>
-      // Função para obter o valor de um parâmetro da URL (como o 'token')
-      function getUrlParameter(name) {
-          name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-          var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-          var results = regex.exec(location.search);
-          return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-      }
+    const token = getUrlParameter('token');
 
-      // 1. Obtém o token de acesso da URL
-      var token = getUrlParameter('token');
-
-      // 2. Verifica se o token existe. Se não, exibe uma mensagem de erro.
-      if (token) {
-        // 3. Se o token for encontrado, cria e injeta o elemento de script
-        var script = document.createElement("script");
-
-        // IMPORTANTE: Substitua 'MEMED_SCRIPT_URL' pela URL fornecida pela Memed
-        script.src = "https://integrations.api.memed.com.br/loader.js";
-
-        // Adiciona o token como um atributo 'data-token'
-        script.dataset.token = token;
-
-        // Adiciona um listener para saber quando o script terminou de carregar
-        script.addEventListener("load", function () {
-          console.log("Script da Memed carregado com sucesso!");
-        });
-
-        // Adiciona o script ao corpo do documento
-        document.body.appendChild(script);
-
-      } else {
-        // Exibe um erro na tela se o token não for fornecido
-        document.body.innerHTML = `
-          <div style="padding: 20px; text-align: center;">
-            <h1>Erro: Token de acesso não encontrado.</h1>
-            <p>Por favor, verifique se a URL está correta e se o token foi fornecido.</p>
-          </div>
-        `;
-        console.error("Token de acesso não encontrado na URL.");
-      }
-    </script>
-
+    if (token) {
+      // Cria o script do SDK
+      const script = document.createElement("script");
+      script.src = "https://integrations.api.memed.com.br/loader.js"; // 👈 Confirme com a doc da Memed
+      script.dataset.token = token; // Passa o token como atributo data-token
+      script.addEventListener("load", () => {
+        console.log("Memed SDK carregado!");
+      });
+      document.body.appendChild(script);
+    } else {
+      document.body.innerHTML = "<h1 style='text-align:center;padding:20px;'>Erro: token não encontrado na URL</h1>";
+    }
+  </script>
 </body>
 </html>
