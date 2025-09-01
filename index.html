@@ -21,35 +21,6 @@
 <body>
   <div id="memed-container"></div>
 
-  <script>
-    // Captura parâmetro da URL (?token=SEU_TOKEN)
-    function getUrlParameter(name) {
-      const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-      const results = regex.exec(location.search);
-      return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-    }
-
-    const token = getUrlParameter('token');
-
-    if (token) {
-      // Cria o script oficial do SDK Memed
-      const script = document.createElement("script");
-      script.src = "https://integrations.api.memed.com.br/loader.js"; // 👈 confirme a URL do SDK com a Memed
-      script.dataset.token = token; // Token vai como data-token
-      script.dataset.container = "#memed-container"; // Onde renderizar
-      script.addEventListener("load", () => {
-        console.log("Memed carregado com sucesso!");
-      });
-      document.body.appendChild(script);
-    } else {
-      document.body.innerHTML = `
-        <div style="padding:20px;text-align:center">
-          <h1>Erro: Token de acesso não encontrado.</h1>
-          <p>Adicione ?token=SEU_TOKEN na URL.</p>
-        </div>
-      `;
-    }
-  </script>
   script.addEventListener("load", () => {
   console.log("Loader da Memed carregado!");
   if (typeof Memed !== "undefined") {
@@ -58,5 +29,6 @@
     console.warn("Memed SDK não inicializado!");
   }
 });
+
 </body>
 </html>
