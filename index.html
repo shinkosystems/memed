@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2685.1">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Prescrição Digital&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="memed-container"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Função para obter o parâmetro 'token' da URL</p>
+<p class="p1"><span class="Apple-converted-space">      </span>function getUrlParameter(name) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>var regex = new RegExp('[\\?&amp;]' + name + '=([^&amp;#]*)');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>var results = regex.exec(location.search);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));</p>
+<p class="p1"><span class="Apple-converted-space">      </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>// Obtém o token da URL</p>
+<p class="p1"><span class="Apple-converted-space">      </span>var token = getUrlParameter('token');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>if (token) {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>var script = document.createElement("script");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>script.src = "https://example.com/memed-script.js"; // Substitua pela URL da Memed</p>
+<p class="p1"><span class="Apple-converted-space">        </span>script.dataset.token = token;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>script.addEventListener("load", function () {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>console.log("Script da Memed carregado com sucesso!");</p>
+<p class="p1"><span class="Apple-converted-space">          </span>// Lógica adicional pode ser adicionada aqui</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.body.appendChild(script);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>console.error("Token de acesso não encontrado na URL.");</p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.body.innerHTML = "&lt;h1&gt;Erro: Token de acesso não fornecido.&lt;/h1&gt;";</p>
+<p class="p1"><span class="Apple-converted-space">      </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
